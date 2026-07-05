@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Contact Book</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <h1>📖 The Contact Book</h1>
+        <hr>
+        
+        <!-- Add Contact Form -->
+        <div class="form-box">
+            <h2>Add New Contact</h2>
+            <input type="text" id="contactName" placeholder="Full Name" required>
+            <input type="email" id="contactEmail" placeholder="Email Address" required>
+            <input type="tel" id="contactPhone" placeholder="Phone Number" required>
+            <button onclick="addContact()">Add Contact</button>
+        </div>
+
+        <!-- Directory Display -->
+        <div class="list-box">
+            <h2>Saved Contacts</h2>
+            <div id="contactList" class="contact-grid">
+                <!-- Javascript will inject list items here -->
+            </div>
+        </div>
+    </div>
+    <script src="/static/app.js"></script>
+</body>
+</html>

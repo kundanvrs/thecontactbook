@@ -56,6 +56,6 @@ jobs:
         # Pointing explicitly to your k8s folder and yml file
         sed -i "s|image: .*contactbook-web:.*|image: ${{ steps.string.outputs.lowercase_owner }}/contactbook-web:${{ github.sha }}|g" k8s/contactbook-web.yml
         
-        git add k8s/contactbook-web.yml
+        git add k8s/thecontactbook-web.yml
         git commit -m "chore: update contactbook-web image tag to ${{ github.sha }} [skip ci]"
         git push

@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: thcontactbook-web
+  name: thecontactbook-web
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: thcontactbook-web
+      app: thecontactbook-web
   template:
     metadata:
       labels:
-        app: thcontactbook-web
+        app: thecontactbook-web
     spec:
       containers:
         - name: web
           # Automatically pulls your freshly built GitHub Actions image
-          image: kundanvrs/thcontactbook-web:latest
+          image: kundanvrs/thecontactbook-web:latest
           imagePullPolicy: IfNotPresent  # <-- Add/change this line
           ports:
             - containerPort: 8000
@@ -26,7 +26,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: thcontactbook-service
+  name: thecontactbook-service
 spec:
   type: NodePort
   ports:
@@ -34,4 +34,4 @@ spec:
       targetPort: 8000
       nodePort: 30080
   selector:
-    app: thcontactbook-web
+    app: thecontactbook-web

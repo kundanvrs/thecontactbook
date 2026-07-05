@@ -3,21 +3,18 @@ name: Build, Push, and Update Manifest (GitOps)
 on:
   push:
     branches: [ "main" ]
-  
+
 jobs:
   build-push-and-deploy:
     runs-on: ubuntu-latest
     
-    # Add these lines right here 👇
     permissions:
       contents: write  # Allows the bot to push commits back to the repo
 
     steps:
     - name: Checkout Repository Code
       uses: actions/checkout@v4
-      
-      # (Rest of your steps continue below...)
-    # Crucial for cross-compiling ARM64 images on AMD64 GitHub runners
+
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
 
@@ -35,7 +32,6 @@ jobs:
       run: |
         echo "lowercase_owner=$(echo '${{ secrets.DOCKER_USERNAME }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
 
-    # Fixed permanently by adding the platform matrix
     - name: Build and Push Multi-Arch Image
       uses: docker/build-push-action@v6
       with:
@@ -47,15 +43,17 @@ jobs:
           ${{ steps.string.outputs.lowercase_owner }}/thecontactbook-web:latest
           ${{ steps.string.outputs.lowercase_owner }}/thecontactbook-web:${{ github.sha }}
 
-    # Automatically updates your YAML file so Argo CD can see a text change
     - name: Update Kubernetes Manifest Tag
       run: |
         git config --global user.name "GitHub Actions Bot"
         git config --global user.email "actions@github.com"
         
-        # Pointing explicitly to your k8s folder and yml file
         sed -i "s|image: .*thecontactbook-web:.*|image: ${{ steps.string.outputs.lowercase_owner }}/thecontactbook-web:${{ github.sha }}|g" k8s/thecontactbook-web.yml
-        
-        git add k8s/thecontactbook-web.yml
-        git commit -m "chore: update thecontactbook-web image tag to ${{ github.sha }} [skip ci]"
-        git push
+
+        if ! git diff --quiet; then
+          git add k8s/thecontactbook-web.yml
+          git commit -m "chore: update thecontactbook-web image tag to ${{ github.sha }} [skip ci]"
+          git push
+        else
+          echo "No changes detected, skipping commit."
+        fi

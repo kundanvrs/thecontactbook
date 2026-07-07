@@ -177,4 +177,4 @@ CRUD app → Containerized → Deployed on Kubernetes → GitOps with Argo CD �
 3. Argo CD detects manifest change → syncs cluster.
 4. Application runs in Kubernetes → monitored via Prometheus & Grafana.
 
-![TheContactBook DevOps Pipeline](workflow.png)
+![TheContactBook DevOps Pipeline]([workflow.png](https://github.com/kundanvrs/thecontactbook/blob/main/workflow.png)

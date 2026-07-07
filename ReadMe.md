@@ -1,5 +1,4 @@
 
-```markdown
 # 📒 TheContactBook
 
 A CRUD application built with **FastAPI**, **Python**, **PostgreSQL**, and a simple frontend using **HTML, CSS, JS**.  
@@ -38,26 +37,17 @@ git clone https://github.com/your-repo/thecontactbook.git
 cd thecontactbook
 ```
 
-### 2. Build Docker Image
-```bash
-docker build -t thecontactbook:latest .
-```
+### 2. GitOps with Argo CD
+- Install Argo CD in your cluster.
+- Connect your Git repository containing Kubernetes manifests.
+- Argo CD continuously syncs the cluster state with Git.
 
-### 3. Run Locally with Docker
-```bash
-docker run -d -p 8000:8000 --name thecontactbook thecontactbook:latest
-```
-
-### 4. Deploy on Kubernetes
-Create a namespace:
+### 3. Setup Github Action & Docker Credentials
+- Set Docker credentials in GitHub Actions
+- 
+### 4. Create a namespace:
 ```bash
 kubectl create namespace thecontactbook
-```
-
-Apply manifests:
-```bash
-kubectl apply -f k8s/deployment.yaml -n thecontactbook
-kubectl apply -f k8s/service.yaml -n thecontactbook
 ```
 
 ### 5. Port Forward Service
@@ -67,12 +57,8 @@ kubectl port-forward svc/thecontactbook-service 8000:8000 -n thecontactbook
 ```
 Now open: `http://localhost:8000`
 
-### 6. GitOps with Argo CD
-- Install Argo CD in your cluster.
-- Connect your Git repository containing Kubernetes manifests.
-- Argo CD continuously syncs cluster state with Git.
 
-### 7. Monitoring with Prometheus & Grafana
+### 6. Monitoring with Prometheus & Grafana
 - Prometheus scrapes metrics from FastAPI and Kubernetes.
 - Grafana dashboards visualize application statistics.
 - Example: API request counts, latency, DB connections.
@@ -153,15 +139,6 @@ jobs:
 2. Workflow updates Kubernetes manifest → commits back to Git.
 3. Argo CD detects manifest change → syncs cluster.
 4. Application runs in Kubernetes → monitored via Prometheus & Grafana.
-
----
-
-## 🔑 Useful Commands
-- **Build Docker image**: `docker build -t thecontactbook:latest .`
-- **Run container**: `docker run -d -p 8000:8000 thecontactbook:latest`
-- **Create namespace**: `kubectl create namespace thecontactbook`
-- **Apply manifests**: `kubectl apply -f k8s/ -n thecontactbook`
-- **Port forward service**: `kubectl port-forward svc/thecontactbook-service 8000:8000 -n thecontactbook`
 
 ---
 

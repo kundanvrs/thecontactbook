@@ -15,7 +15,7 @@ spec:
       containers:
         - name: web
           # Automatically pulls your freshly built GitHub Actions image
-          image: kundanvrs/thecontactbook-web:77c1a61200efb6c03db07c8ad00076f6cdd0d0d9
+          image: kundanvrs/thecontactbook-web:581a918e936a784ac35fb8d183da0870c5ba0c5f
           imagePullPolicy: IfNotPresent  # <-- Add/change this line
           ports:
             - containerPort: 8000

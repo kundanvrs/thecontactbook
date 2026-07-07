@@ -1,4 +1,3 @@
-Perfect — let’s extend your **README.md** to also cover the **GitHub Actions CI/CD pipeline** you’ve set up for building, pushing, and updating Kubernetes manifests. Here’s a polished version that ties everything together:
 
 ```markdown
 # 📒 TheContactBook
